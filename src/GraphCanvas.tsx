@@ -60,6 +60,8 @@ export interface GraphCanvasProps extends Omit<GraphSceneProps, 'theme'> {
 
   onReady?: () => void;
 
+  onCameraControlsReady?: (cameraControls: ThreeCameraControls) => void;
+
   /**
    * When the canvas had a lasso selection.
    */
@@ -123,6 +125,7 @@ export const GraphCanvas: FC<GraphCanvasProps & { ref?: Ref<GraphCanvasRef> }> =
         disabled,
         lassoType,
         onReady,
+        onCameraControlsReady,
         onLasso,
         onLassoEnd,
         glOptions,
@@ -207,6 +210,7 @@ export const GraphCanvas: FC<GraphCanvasProps & { ref?: Ref<GraphCanvasRef> }> =
                 minDistance={minDistance}
                 maxDistance={maxDistance}
                 animated={animated}
+                onCameraControlsReady={onCameraControlsReady}
               >
                 <Lasso
                   disabled={disabled}

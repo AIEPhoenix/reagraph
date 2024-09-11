@@ -100,6 +100,8 @@ export interface CameraControlsProps {
    * The minimum distance for the camera.
    */
   minDistance?: number;
+
+  onCameraControlsReady?: (cameraControls: ThreeCameraControls) => void;
 }
 
 export type CameraControlsRef = CameraControlsContextProps;
@@ -108,7 +110,15 @@ export const CameraControls: FC<
   CameraControlsProps & { ref?: Ref<CameraControlsRef> }
 > = forwardRef(
   (
-    { mode, children, animated, disabled, minDistance, maxDistance },
+    {
+      mode,
+      children,
+      animated,
+      disabled,
+      minDistance,
+      maxDistance,
+      onCameraControlsReady
+    },
     ref: Ref<CameraControlsRef>
   ) => {
     const cameraRef = useRef<ThreeCameraControls | null>(null);
@@ -332,6 +342,12 @@ export const CameraControls: FC<
     );
 
     useImperativeHandle(ref, () => values);
+
+    useEffect(() => {
+      if (cameraRef.current) {
+        onCameraControlsReady?.(cameraRef.current);
+      }
+    }, []);
 
     return (
       <CameraControlsContext.Provider value={values}>

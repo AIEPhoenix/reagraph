@@ -1,6 +1,6 @@
 {
-  "name": "reagraph",
-  "version": "4.19.3",
+  "name": "aie-reagraph",
+  "version": "4.19.4",
   "description": "WebGL Node-based Graph for React",
   "scripts": {
     "build": "vite build --mode library",
@@ -133,5 +133,6 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.9.0"
 }
