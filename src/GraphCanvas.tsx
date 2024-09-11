@@ -58,6 +58,8 @@ export interface GraphCanvasProps extends Omit<GraphSceneProps, 'theme'> {
    */
   glOptions?: Object;
 
+  onReady?: () => void;
+
   /**
    * When the canvas had a lasso selection.
    */
@@ -120,6 +122,7 @@ export const GraphCanvas: FC<GraphCanvasProps & { ref?: Ref<GraphCanvasRef> }> =
         animated,
         disabled,
         lassoType,
+        onReady,
         onLasso,
         onLassoEnd,
         glOptions,
@@ -174,6 +177,9 @@ export const GraphCanvas: FC<GraphCanvasProps & { ref?: Ref<GraphCanvasRef> }> =
             flat
             gl={gl}
             camera={CAMERA_DEFAULTS}
+            onCreated={() => {
+              onReady?.();
+            }}
             onPointerMissed={onCanvasClick}
           >
             <Provider
